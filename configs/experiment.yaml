@@ -1,0 +1,61 @@
+# Experiment configuration for the system identification study.
+# All configurable values from the spec are collected here.
+
+sampling:
+  Ts: 0.02  # seconds
+
+excitation:
+  omega_min_rad_s: 0.1
+  omega_max_rad_s: 15.0
+  plot_omega_max_rad_s: 60.0
+  bode_grid_points: 200
+
+data:
+  seed: 42
+  splits:
+    train:
+      random_steps: 10
+      multisine: 10
+      chirp: 4
+    val:
+      random_steps: 2
+      multisine: 2
+      chirp: 2
+    test_iid:
+      random_steps: 2
+      multisine: 2
+      chirp: 2
+  quiet_lead_s: 0.5
+  hold_time_range_s: [0.3, 2.0]
+  multisine_components: 12
+  impulse_amplitude_fraction: 0.1
+
+noise:
+  snr_levels_db: [null, 40, 30, 20, 10]  # null means infinity (no noise)
+  baseline_snr_db: 40
+
+neural_ode:
+  n_x: 4
+  hidden_layers: 2
+  hidden_units: 64
+  activation: "tanh"
+  lr_max: 0.01
+  lr_min: 0.0001
+  weight_decay: 0.00001
+  max_epochs: 1500
+  batch_size: 12
+  patience: 100
+  curriculum_fractions: [0.2, 0.4, 0.7, 1.0]
+  curriculum_epoch_fractions: [0.0, 0.25, 0.5, 0.75]
+  seeds: [0, 1, 2]
+  sanity_fit_threshold: 95.0
+
+ood:
+  amplitude_scale: 3.0
+  frequency_range_rad_s: [15.0, 40.0]
+  waveform_period_range_s: [1.0, 8.0]
+
+param_variation:
+  n_plants: 10
+  scale_range: [0.7, 1.3]
+  seed: 99

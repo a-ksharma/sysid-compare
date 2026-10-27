@@ -1,0 +1,12 @@
+data/
+__pycache__/
+*.pyc
+*.pyo
+.venv/
+*.egg-info/
+dist/
+build/
+.mypy_cache/
+.ruff_cache/
+.pytest_cache/
+dashboard/.streamlit/secrets.toml

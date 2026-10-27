@@ -1,0 +1,83 @@
+# Plant definitions for the system identification study.
+# This file is the single source of truth for all plant parameters.
+# No plant constants appear anywhere else in the code.
+
+plants:
+  rc:
+    name: "Series RC low-pass"
+    order: 1
+    input:
+      name: "source voltage"
+      unit: "V"
+    output:
+      name: "capacitor voltage"
+      unit: "V"
+    parameters:
+      R_ohm: 20000.0
+      C_farad: 0.00001
+    derived:
+      tau_s: 0.2             # R * C
+    u_max: 5.0
+    # H(s) = 1 / (tau * s + 1)
+    # A = [-1/tau], B = [1/tau], C = [1], D = [0]
+    identifiable:
+      - tau_s
+    dominant_time_scale_s: 0.2
+    sequence_duration_s: 6.0
+    impulse_horizon_s: 1.5
+
+  motor:
+    name: "Armature-controlled DC motor (inductance neglected)"
+    order: 1
+    input:
+      name: "armature voltage"
+      unit: "V"
+    output:
+      name: "shaft speed"
+      unit: "rad/s"
+    parameters:
+      R_ohm: 1.0
+      Kt: 0.1
+      Ke: 0.1
+      b: 0.01
+      J_kg_m2: 0.005
+    derived:
+      K_rad_s_per_V: 5.0     # Kt / (R*b + Kt*Ke)
+      tau_s: 0.25             # J*R / (R*b + Kt*Ke)
+    u_max: 12.0
+    # H(s) = K / (tau * s + 1)
+    # A = [-1/tau], B = [K/tau], C = [1], D = [0]
+    identifiable:
+      - K_rad_s_per_V
+      - tau_s
+    dominant_time_scale_s: 0.25
+    sequence_duration_s: 10.0
+    impulse_horizon_s: 2.5
+
+  msd:
+    name: "Mass-spring-damper"
+    order: 2
+    input:
+      name: "force"
+      unit: "N"
+    output:
+      name: "displacement"
+      unit: "m"
+    parameters:
+      m_kg: 1.0
+      c_Ns_per_m: 0.8
+      k_N_per_m: 4.0
+    derived:
+      omega_n_rad_s: 2.0     # sqrt(k/m)
+      zeta: 0.2              # c / (2 * sqrt(k * m))
+    u_max: 10.0
+    # H(s) = 1 / (m*s^2 + c*s + k)
+    # states: [x, v]
+    # A = [[0, 1], [-k/m, -c/m]], B = [[0], [1/m]], C = [1, 0], D = [0]
+    identifiable:
+      - m_kg
+      - c_Ns_per_m
+      - k_N_per_m
+    dominant_time_scale_s: 2.5   # 1 / (zeta * omega_n)
+    sequence_duration_s: 15.0
+    impulse_horizon_s: 12.0

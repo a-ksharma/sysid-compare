@@ -1,0 +1,14 @@
+# Research and development environment.
+# Includes training dependencies (PyTorch), validation tools (python-control),
+# and development tools (ruff, mypy, pytest).
+numpy~=2.1
+scipy~=1.14
+matplotlib~=3.9
+pyyaml~=6.0
+types-PyYAML~=6.0
+torch>=2.5
+torchdiffeq~=0.2
+control~=0.10
+pytest~=8.3
+mypy~=1.13
+ruff~=0.8
