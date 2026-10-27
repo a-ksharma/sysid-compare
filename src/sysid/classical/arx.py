@@ -170,13 +170,19 @@ def fit_arx(
     Ad, Bd, Cd, Dd = arx_to_discrete_ss(a_coeffs, b_coeffs)
 
     # Continuous state-space conversion via matrix logarithm
-    A, B, C, D = discrete_to_continuous_ss(Ad, Bd, Cd, Dd, Ts)
-
-    # Continuous transfer function
-    num, den = tf_from_ss(A, B, C, D)
-
-    # System poles
-    c_poles = np.linalg.eigvals(A)
+    try:
+        A, B, C, D = discrete_to_continuous_ss(Ad, Bd, Cd, Dd, Ts)
+        num, den = tf_from_ss(A, B, C, D)
+        c_poles = np.linalg.eigvals(A)
+    except ValueError:
+        # Decision K15: d2c conversion rejected if logm produces complex matrix
+        A = np.full_like(Ad, np.nan)
+        B = np.full_like(Bd, np.nan)
+        C = np.full_like(Cd, np.nan)
+        D = np.full_like(Dd, np.nan)
+        num = np.array([np.nan])
+        den = np.array([np.nan])
+        c_poles = np.full(order, np.nan + 1j * np.nan)
     d_poles = np.linalg.eigvals(Ad)
 
     return ARXModel(
