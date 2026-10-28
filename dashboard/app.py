@@ -5,9 +5,6 @@ from __future__ import annotations
 import sys
 from pathlib import Path
 
-from pathlib import Path
-import sys
-
 import streamlit as st
 
 # Ensure repository root and dashboard directory are present in sys.path
@@ -81,4 +78,3 @@ def main() -> None:
 
 if __name__ == "__main__":
     main()
-

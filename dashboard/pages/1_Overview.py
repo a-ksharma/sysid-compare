@@ -101,13 +101,10 @@ def render_overview_page() -> None:
             st.caption(eq_info["desc"])
 
     st.markdown("---")
-    st.header("Service Status & Provenance")
-    st.markdown(f"**API Base URL:** `{client.base_url}`")
     st.markdown(
-        f"**Backend Status:** `{health.get('status')}` (API v{health.get('version')})"
+        "Source code and benchmark artifacts: "
+        "[github.com/a-ksharma/sysid-compare](https://github.com/a-ksharma/sysid-compare)"
     )
-    loaded_p = ", ".join(health.get("loaded_plants", []))
-    st.markdown(f"**Loaded Physical Plants:** `{loaded_p}`")
 
 
 if __name__ == "__main__":

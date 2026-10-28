@@ -67,7 +67,7 @@ class APIClient:
         return (
             False,
             (
-                f"Unable to reach API at {self.base_url} after "
+                f"Unable to connect to the backend service after "
                 f"{max_attempts * interval_s}s. "
                 "Please verify the backend service is running."
             ),

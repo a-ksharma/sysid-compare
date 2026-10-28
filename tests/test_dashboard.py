@@ -170,4 +170,4 @@ def test_api_client_wake_state_on_unreachable_server() -> None:
 
     success, msg = client.wake_service(max_attempts=1, interval_s=0.1)
     assert success is False
-    assert "Unable to reach API" in msg
+    assert "Unable to connect" in msg
