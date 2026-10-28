@@ -178,7 +178,11 @@ def main() -> None:
     """CLI runner for smoke test."""
     parser = argparse.ArgumentParser(description="API smoke test suite.")
     parser.add_argument(
-        "--url", default=None, help="Optional external base URL to probe."
+        "--base-url",
+        "--url",
+        dest="url",
+        default=None,
+        help="Optional external base URL to probe.",
     )
     args = parser.parse_args()
     success = run_smoke_test(args.url)

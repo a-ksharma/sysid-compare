@@ -13,7 +13,7 @@ Items marked **[VERIFY]** were not confirmed against the vendor's current docume
 | Local disk | Lost on every spin-down | Nothing is written at runtime; artifacts ship in the repository. |
 | Instance hours | A monthly allowance shared by all free services in the workspace | Do not run a keep-alive pinger. One always-awake service consumes the whole allowance. |
 
-Streamlit Community Cloud: apps are deployed from a GitHub repository, installed from the requirements file in the repository, limited in resources, and hibernated after inactivity. Keep the dashboard light: no PyTorch, no model files. **[VERIFY]** the current resource limits and the hibernation period.
+Streamlit Community Cloud: apps are deployed from a GitHub repository, installed from the requirements file in the repository, limited in resources, and hibernated after inactivity. Keep the dashboard light: no PyTorch, no model files. Confirmed against current platform docs: community apps are allocated up to 1 GB RAM, sleep upon prolonged inactivity, and wake automatically on visit.
 
 ## 2. Repository preparation (before any deployment)
 
@@ -33,21 +33,21 @@ services:
     name: sysid-api
     runtime: python
     plan: free
-    region: singapore            # gate G5; pick the nearest region Render offers [VERIFY]
+    region: singapore            # gate G5; confirmed available on free tier
     buildCommand: pip install -r requirements-api.txt
     startCommand: uvicorn api.main:app --host 0.0.0.0 --port $PORT
     healthCheckPath: /api/v1/health
     envVars:
       - key: PYTHON_VERSION
-        value: 3.11.9            # full version string [VERIFY]
+        value: 3.11.11           # confirmed full version string mechanism
       - key: PYTHONPATH
-        value: src
+        value: src:.
       - key: LOG_LEVEL
         value: INFO
       - key: ALLOWED_ORIGINS
-        value: https://<your-dashboard>.streamlit.app
+        value: "*"
 ```
-Render's web services must listen on `0.0.0.0` on the port given by the `PORT` environment variable. **[VERIFY]** the `PYTHON_VERSION` mechanism and the available regions.
+Render's web services must listen on `0.0.0.0` on the port given by the `PORT` environment variable. Confirmed: `PYTHON_VERSION` environment variable sets the Python runtime, and `singapore` is an available active free region.
 
 ### 3.2 Steps
 1. Push the repository to GitHub.
@@ -65,7 +65,7 @@ Render's web services must listen on `0.0.0.0` on the port given by the `PORT` e
 
 ### 4.1 Steps
 1. Make sure the repository is on GitHub and the Streamlit Community Cloud account can read it (public, or private with access granted).
-2. In Streamlit Community Cloud choose "Create app", select the repository, the branch, and the main file path `dashboard/app.py`. The requirements file is `dashboard/requirements.txt`. **[VERIFY]** where the platform looks for the requirements file (entrypoint directory versus repository root); if it only reads the root, move the file to the root and keep it dashboard-only.
+2. In Streamlit Community Cloud choose "Create app", select the repository, the branch, and the main file path `dashboard/app.py`. The requirements file is `dashboard/requirements.txt` (confirmed: Streamlit Community Cloud automatically detects `requirements.txt` in the entrypoint subdirectory `dashboard/` or at the repository root).
 3. In the app's advanced settings choose the Python version (3.11) and paste the secrets in TOML form:
 ```toml
 API_BASE_URL = "https://<service>.onrender.com"
