@@ -61,3 +61,4 @@ Date: 2026-10-20
 | K17 | Neural ODE readout matrix $C$ | Parameterize $C$ as a learnable linear layer without bias (`nn.Linear(n_x, 1, bias=False)`) trained end-to-end. |
 | K18 | Neural ODE midpoint ZOH boundary | Index input via `idx = int(np.clip(np.floor(t / Ts + 1e-6), 0, len(u) - 1))` and verify with test suite callback logging. |
 | K19 | Phase 0 baseline completion | Audit and complete Phase 0 files, install missing stubs, eliminate warnings, and verify clean test/lint passes. |
+| K20 | G2 resolution -- Optional LSTM baseline | Skipped per user instruction. Proceed directly to Phase 7 (FastAPI API service) and Phase 8 (Streamlit dashboard), keeping the focus strictly on continuous-time system identification (classical LTI vs. Neural ODE). |

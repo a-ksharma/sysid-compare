@@ -204,7 +204,9 @@ def plot_ood_bar(
     ax.set_xticklabels(labels)
     ax.grid(True, axis="y", linestyle=":", alpha=0.6)
     ax.legend(loc="best")
-    ax.set_ylim(bottom=float(min(min(arx_fits + prony_fits + node_fits) - 10.0, 0.0)), top=105.0)
+    ax.set_ylim(
+        bottom=float(min(min(arx_fits + prony_fits + node_fits) - 10.0, 0.0)), top=105.0
+    )
 
     fig.tight_layout()
     out_file = output_dir / f"ood_{plant_id}.png"

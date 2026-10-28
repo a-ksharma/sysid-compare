@@ -2,10 +2,7 @@
 
 from __future__ import annotations
 
-from sysid.neural.export import export_neural_ode
-from sysid.neural.model import MLPVectorField, NeuralODE
 from sysid.neural.numpy_infer import NumpyNeuralODE, load_numpy_neural_ode
-from sysid.neural.train import compute_fit_percent, train_neural_ode
 
 __all__ = [
     "MLPVectorField",
@@ -16,3 +13,11 @@ __all__ = [
     "load_numpy_neural_ode",
     "train_neural_ode",
 ]
+
+try:
+    from sysid.neural.export import export_neural_ode
+    from sysid.neural.model import MLPVectorField, NeuralODE
+    from sysid.neural.train import compute_fit_percent, train_neural_ode
+except ImportError:
+    # PyTorch is optional during pure NumPy inference / API deployment
+    pass
