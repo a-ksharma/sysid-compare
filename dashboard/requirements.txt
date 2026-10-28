@@ -1,5 +1,5 @@
 # Dashboard deployment environment. No PyTorch, no sysid, no model files.
-# Exact version pins will be set in Phase 8 from the resolved local environment.
-streamlit~=1.40
-plotly~=5.24
-requests~=2.32
+# Pinned for Streamlit Community Cloud deployment
+streamlit>=1.40,<1.67
+plotly>=5.24,<7.2
+requests>=2.32,<2.35
