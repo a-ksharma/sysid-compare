@@ -12,3 +12,9 @@ build/
 .streamlit/secrets.toml
 dashboard/.streamlit/secrets.toml
 
+# Prompt and specification instruction files
+AGENTS.md
+Master_Prompt.md
+.agent/
+docs/*.md
+
