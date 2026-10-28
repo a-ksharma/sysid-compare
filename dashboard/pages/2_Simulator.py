@@ -3,8 +3,21 @@
 from __future__ import annotations
 
 import streamlit as st
-from dashboard.api_client import cached_get_system, cached_list_systems, get_api_client
-from dashboard.plotting import plot_simulation_trajectories
+
+try:
+    from dashboard.api_client import (
+        cached_get_system,
+        cached_list_systems,
+        get_api_client,
+    )
+    from dashboard.plotting import plot_simulation_trajectories
+except ModuleNotFoundError:
+    from api_client import (
+        cached_get_system,
+        cached_list_systems,
+        get_api_client,
+    )
+    from plotting import plot_simulation_trajectories
 
 
 def render_simulator_page() -> None:

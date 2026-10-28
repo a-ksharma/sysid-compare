@@ -3,7 +3,11 @@
 from __future__ import annotations
 
 import streamlit as st
-from dashboard.api_client import cached_list_systems, get_api_client
+
+try:
+    from dashboard.api_client import cached_list_systems, get_api_client
+except ModuleNotFoundError:
+    from api_client import cached_list_systems, get_api_client
 
 
 def render_overview_page() -> None:

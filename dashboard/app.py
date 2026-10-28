@@ -2,8 +2,23 @@
 
 from __future__ import annotations
 
+import sys
+from pathlib import Path
+
 import streamlit as st
-from dashboard.api_client import get_api_client
+
+# Ensure repository root and dashboard directory are present in sys.path
+_DASHBOARD_DIR = Path(__file__).resolve().parent
+_REPO_ROOT = _DASHBOARD_DIR.parent
+if str(_REPO_ROOT) not in sys.path:
+    sys.path.insert(0, str(_REPO_ROOT))
+if str(_DASHBOARD_DIR) not in sys.path:
+    sys.path.insert(0, str(_DASHBOARD_DIR))
+
+try:
+    from dashboard.api_client import get_api_client
+except ModuleNotFoundError:
+    from api_client import get_api_client  # noqa: E402
 
 st.set_page_config(
     page_title="System Identification: Classical vs Learned",
@@ -38,16 +53,23 @@ def main() -> None:
     else:
         st.sidebar.success(f"API: Connected (v{health.get('version', '0.1.0')})")
 
-    # Multi-page navigation
+    # Multi-page navigation using explicit paths
+    pages_dir = _DASHBOARD_DIR / "pages"
     pages = [
-        st.Page("pages/1_Overview.py", title="1. Overview"),
-        st.Page("pages/2_Simulator.py", title="2. Simulator Sandbox"),
-        st.Page("pages/3_Frequency_and_Impulse.py", title="3. Frequency & Impulse"),
+        st.Page(str(pages_dir / "1_Overview.py"), title="1. Overview"),
+        st.Page(str(pages_dir / "2_Simulator.py"), title="2. Simulator Sandbox"),
         st.Page(
-            "pages/4_Generalization_and_Robustness.py",
+            str(pages_dir / "3_Frequency_and_Impulse.py"),
+            title="3. Frequency & Impulse",
+        ),
+        st.Page(
+            str(pages_dir / "4_Generalization_and_Robustness.py"),
             title="4. Generalization & Robustness",
         ),
-        st.Page("pages/5_Methodology.py", title="5. Methodology & Cards"),
+        st.Page(
+            str(pages_dir / "5_Methodology.py"),
+            title="5. Methodology & Cards",
+        ),
     ]
 
     pg = st.navigation(pages)

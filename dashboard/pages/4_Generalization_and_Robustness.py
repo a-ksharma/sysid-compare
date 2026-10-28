@@ -3,14 +3,25 @@
 from __future__ import annotations
 
 import streamlit as st
-from dashboard.api_client import (
-    cached_get_results,
-    cached_list_systems,
-)
-from dashboard.plotting import (
-    plot_noise_sweep_curve,
-    plot_ood_bar_chart,
-)
+
+try:
+    from dashboard.api_client import (
+        cached_get_results,
+        cached_list_systems,
+    )
+    from dashboard.plotting import (
+        plot_noise_sweep_curve,
+        plot_ood_bar_chart,
+    )
+except ModuleNotFoundError:
+    from api_client import (
+        cached_get_results,
+        cached_list_systems,
+    )
+    from plotting import (
+        plot_noise_sweep_curve,
+        plot_ood_bar_chart,
+    )
 
 
 def render_robustness_page() -> None:

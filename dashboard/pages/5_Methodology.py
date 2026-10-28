@@ -3,7 +3,11 @@
 from __future__ import annotations
 
 import streamlit as st
-from dashboard.api_client import cached_get_models
+
+try:
+    from dashboard.api_client import cached_get_models
+except ModuleNotFoundError:
+    from api_client import cached_get_models
 
 
 def render_methodology_page() -> None:
