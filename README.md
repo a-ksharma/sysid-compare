@@ -168,11 +168,7 @@ python scripts/smoke_test.py --base-url http://127.0.0.1:8000
 ---
 
 ## 6. Live Deployment Links
-
-- **FastAPI Backend (Render)**: `https://sysid-api.onrender.com`
-  - Health endpoint: `https://sysid-api.onrender.com/api/v1/health`
-  - OpenAPI documentation: `https://sysid-api.onrender.com/docs`
-- **Interactive Dashboard (Streamlit Community Cloud)**: `https://sysid-dashboard.streamlit.app`
+- **Interactive Dashboard (Streamlit Community Cloud)**: `[https://sysid-dashboard.streamlit.app](https://sysid-compare-dashboard.streamlit.app/)`
 
 ---
 
@@ -184,3 +180,17 @@ In accordance with scientific rigor:
 3. **Output-Only White Noise**: Measurement noise is modeled as independent additive Gaussian perturbations; input excitation noise and colored process disturbances are omitted.
 4. **Seed Sensitivity**: Neural ODE training convergence depends on pseudorandom weight initialization; results are benchmarked with seed 42.
 5. **Free-Tier Sleep Delay**: The backend deployed on Render spins down after 15 minutes of inactivity; the initial waking request takes approximately 50 to 60 seconds.
+
+---
+
+## Author
+
+**Ayush Kumar Sharma**
+- GitHub: [@a-ksharma](https://github.com/a-ksharma)
+- LinkedIn: [@ayush-ksharma](https://www.linkedin.com/in/ayush-ksharma)
+
+---
+
+## License
+
+MIT License — see [LICENSE](LICENSE) for details.
