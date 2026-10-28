@@ -3,12 +3,12 @@
 PYTHON_PATH_PREFIX = set PYTHONPATH=src &&
 
 lint:
-	ruff check src tests api scripts
-	ruff format --check src tests api scripts
-	$(PYTHON_PATH_PREFIX) mypy src
+	ruff check src tests api scripts dashboard
+	ruff format --check src tests api scripts dashboard
+	$(PYTHON_PATH_PREFIX) mypy src api scripts
 
 format:
-	ruff format src tests api scripts
+	ruff format src tests api scripts dashboard
 
 test:
 	pytest

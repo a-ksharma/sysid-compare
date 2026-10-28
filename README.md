@@ -48,13 +48,15 @@ All plants are parameterized via `configs/systems.yaml`. Data generation samples
 
 All values are generated deterministically by `scripts/run_experiments.py` and stored in `artifacts/results/<plant>/evaluation.json`.
 
-### A. Noise-Free Identification Fit Percent (E1)
+### A. Baseline IID Test Set Evaluation Fit Percent (E1)
+
+Evaluated on the independent 50-sequence test split under baseline SNR (noise-free for `rc` and `motor`, 40 dB for `msd` per spec section 4.3):
 
 | Plant | ARX Fit (%) | Prony Fit (%) | Neural ODE Fit (%) |
 | :--- | :---: | :---: | :---: |
 | **RC Low-Pass** | $99.82\%$ | $100.00\%$ | $98.42\%$ |
-| **DC Motor** | $99.64\%$ | $100.00\%$ | $99.28\%$ |
-| **Mass-Spring-Damper** | $100.00\%$ | $100.00\%$ | $97.92\%$ |
+| **DC Motor** | $99.86\%$ | $100.00\%$ | $99.02\%$ |
+| **Mass-Spring-Damper (40 dB)** | $20.47\%$ | $100.00\%$ | $97.92\%$ |
 
 ### B. Noise Sensitivity on Resonant Dynamics (`msd`, E2)
 
