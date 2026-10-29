@@ -168,7 +168,8 @@ python scripts/smoke_test.py --base-url http://127.0.0.1:8000
 ---
 
 ## 6. Live Deployment Links
-- **Interactive Dashboard (Streamlit Community Cloud)**: `[https://sysid-dashboard.streamlit.app](https://sysid-compare-dashboard.streamlit.app/)`
+
+- **Interactive Dashboard (Streamlit Community Cloud)**: [https://sysid-compare-dashboard.streamlit.app](https://sysid-compare-dashboard.streamlit.app/)
 
 ---
 
@@ -190,7 +191,6 @@ In accordance with scientific rigor:
 - LinkedIn: [@ayush-ksharma](https://www.linkedin.com/in/ayush-ksharma)
 
 ---
-
 ## License
 
-MIT License — see [LICENSE](LICENSE) for details.
+MIT License — see [LICENSE.txt](LICENSE.txt) for details.
